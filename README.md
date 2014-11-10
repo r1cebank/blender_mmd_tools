@@ -1,5 +1,6 @@
 mmd_tools
 ===========
+english version avaliable [here](README_en.md)
 
 概要
 ----

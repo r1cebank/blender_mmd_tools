@@ -40,18 +40,18 @@ Extract the archive and put the folder mmd__tools into the addon folder of blend
    (you can also find the addon my search)
 2. After installation, you can find the panel called MMD on the left of 3D view
 
-### MMDモデルデータ読み込み
-1. mmd_toolsパネルの"import/Model"ボタンを選択してください。
-2. ファイル選択画面でpmxファイルを選択すると、選択されたモデルをインポートします。
+### Importing MMD Models
+1. Please select "import/Model" button in the mmd_tools panel
+2. A file selection window will open and please select the model file you want to import
 
-### モーションデータの読み込み
-1. あらかじめ読み込んでおいたモデルのMeshとArmature、Cameraを選択してください。(選択していない項目はインポートされません)
-2. mmd_toolsパネルの"import/Motion"ボタンを選択してください。
-3. ファイル選択画面でvmdファイルを選択すると選択中のオブジェクトへモーションをインポートします。
-4. 「update scene settings」チェックボックスをオンにしておくと、モーションの読み込み後にフレームレンジ等のシーン設定を自動更新します。
+### Importing MMD Motion Data
+1. According to the motion type you want to import, please select Mesh, Armature or Camera from the project window. (Nothing will be imported if nothing is selected)
+2. Click on the "import/Motion" button from the mmd_blender panel.
+3. A file selection window will open and please select the motion file you want to import
+4. Leave「update scene settings」checked will automatically update the frame range and scene after motion is imported. 
 
 
-各種機能詳細
+Additional Information
 -------------------------------
 ### Import Model
 MMDモデルデータをインポートします。対応形式はpmdファイルおよびpmx(ver2.0)ファイルです。
@@ -129,7 +129,7 @@ GLSLボタンで変更した内容を初期状態に戻します。
 * blenderデフォルトの"Separate"→"By Material"機能を使用しています。
 
 
-その他
+Others
 ------
 * カメラとキャラクタモーションが別ファイルの場合は、ArmatureとMeshを選択してキャラモーション、Cameraを選択してカメラモーションというように2回に分けてインポートしてください。
 * モーションデータのインポート時はボーン名を利用して各ボーンにモーションを適用します。
@@ -147,7 +147,7 @@ GLSLボタンで変更した内容を初期状態に戻します。
 * 複数のpmxファイルをインポートする場合はscaleを統一してください。
 
 
-既知の問題
+Known issues
 ----------
 * 剛体の非衝突グループを強引に解決しているため、剛体の数が多いモデルを読み込むとフリーズすることがあります。
     * 正確には完全なフリーズではなく、読み込みに異常な時間がかかっているだけです。
@@ -163,6 +163,8 @@ Bug・Request・Questions etc.
 ------------------
 Please submit a GitHub issue or contact me using twitter 
 [@sugiany](https://twitter.com/sugiany)
+
+English README translated by [r1cebank](https://github.com/r1cebank)
 
 
 Changelog
