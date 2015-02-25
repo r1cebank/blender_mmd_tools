@@ -54,67 +54,70 @@ Extract the archive and put the folder mmd__tools into the addon folder of blend
 Additional Information
 -------------------------------
 ### Import Model
-MMDモデルデータをインポートします。対応形式はpmdファイルおよびpmx(ver2.0)ファイルです。
-各オプションはデフォルト推薦です。
-剛体情報を読み込みたくない場合は、"import only non dynamics rigid bodies"オプションをオンにしてください。
+This will import the MMD model data, compatible format are up to pmx(ver2.0). 
+We suggest that you leave the options as default.
+If regid body is not loading properly, check "import only non dynamics rigid bodies".
 
 * scale
-    * スケールです。Import Motion時のスケールと統一してください。
+    * If you ever change the scale od the model, please set the same scale for all your motions.
 * rename bones
-    * ボーンの名前をblenderに適した名前にリネームします。（右腕→腕.Lなど）
+    * Automatically rename bone name into blender-friendly names（Ex. 右腕→腕.L）
 * hide rigid bodies and joints
-    *  剛体情報を持つ各種オブジェクトを非表示にします。
+    * Hide all objects with regid body information.
 * import only non dynamics rigid bodies
-    * ボーン追従の剛体のみインポートします。clothやsoft bodyを使用する等、剛体情報が不要な場合に使用してください。
+    * When using with cloth or soft body, which regid information should be ignored, please check this option.
 * ignore non collision groups
-    * 非衝突グループを読み込みません。モデルの読み込み時にフリーズしてしまう場合に使用してください。
+    * Ignore loading of all non collision groups, when loading model and freeze during animation, please select this.
 * distance of ignore collisions
-    * 非衝突グループの解決範囲を指定します。
+    * Ignore distance for collisions groups.
 * use MIP map for UV textures
-    * Blenderの自動ミップマップ生成機能のオンオフを指定します。
-    * 一部アルファチャンネルを持つテクスチャで紫色のノイズが発生する場合はオフにしてください。
+    * Switches Blender's auto MIP map generator.
+    * Please switch off when violet noise showing up for textures with alpha channels.
 * influence of .sph textures
-    * スフィアマップの強度を指定します。(0.0～1.0)
+    * Set the intensity of sphere map (0.0～1.0)
 * influence of .spa textures
-    * スフィアマップの強度を指定します。(0.0～1.0)
+    * Set the intensity of sphere map (0.0～1.0)
 
 ### Import Motion
-現在選択中のArmature、MeshおよびCameraにvmdファイルのモーションを適用します。
+Import Motion to the currently selected Armature, Mesh or Camera from vmd.
 
 * scale
-    * スケールです。Import Model時のスケールと統一してください。
+    * This is scale, please match this with the scale you used for Importing Model.
 * margin
-    * 物理シミュレーション用の余白フレームです。
-    * モーションの初期位置が原点から大きく離れている場合、モーション開始時にモデルが瞬間移動してしまうため物理シミュレーションが破綻します。
-    この現象を回避するため、blenderのタイムライン開始とモーション開始の間に余白を挿入します。
-    * モーション開始時に剛体を安定させる効果もあります。
+    * Blank frames for physics simulations.
+    * When the initial motion is too far from the origin,  physics engine will give incorrect simulation when the motion is started.
+    To avoid this, please set the margin to some value, it will insert some blank frames into the beginning of the timeline to avoid this problem.
 * update scene settings
-    * モーションデータ読み込み後にフレームレンジおよびフレームレートの自動設定を行います。
-    * フレームレンジは現在シーン中に存在するアニメーションを全て再生するために必要なレンジを設定します。
-    * フレームレートを30fpsに変更します。
+    * After motion data is loaded, it will automatically update the scene for you including the scene and the frame range in animation timeline.
+    * Frame range is needed to correctly render all the frames in the scene.
+    * This will also change the framerate to 30fps
 
 ### Set frame range
-フレームレンジは現在シーン中に存在するアニメーションを全て再生するために必要なレンジを設定します。
-また、フレームレートを30fpsに変更します。
-* Import vmdのupdate scene settingsオプションと同じ機能です。
+Change the current frame range to the frame range of the current animation loaded in the scene.
+This also change the framerate into 30fps.
+
+* This feature is the same as the "update scene settings" in Import vmd function.
 
 ### View
 
 #### GLSL
-GLSLモードで表示するための必要設定を自動で行います。
-* ShadingをGLSLに切り替えます。
-* 現在のシーン内全てのマテリアルのshadelessをオフにします。
-* Hemiライトを追加します。
-* ボタンを押した3DViewのシェーディングをTexturedに変更します。
+Automatically set the current shading mode into GLSL
+
+* Shading mode will be changed into GLSL.
+* Change "shadeless" property of all the materials in the scene into off.
+* Add a Hemi light.
+* When button is clicked, 3D view's viewport shading mode will be changed into "Textured"
 
 #### Shadeless
-Shadelessモードで表示するための必要設定を自動で行います。
-* ShadingをGLSLに切り替えます。
-* 現在のシーン内全てのマテリアルをshadelessにします。
-* ボタンを押した3DViewのシェーディングをTexturedに変更します。
+Automatically set the current shading mode into Shadeless
+
+* Shading mode will be changed into GLSL.
+* Change "shadeless" property of all materials in the scene into on.
+* When button is clicked, 3D view's viewport shading mode will be changed into "Textured"
 
 #### Cycles
-シーン内に存在する全てのマテリアルをCycles用に変換します。
+Automatically change all the materials in the scene into Cycles materials.
+
 * 何の根拠もない適当な変換です。
 * 完了メッセージなどは表示されません。マテリアルパネルから変換されているかどうか確認してください。
 * ボタンを押した3DViewのシェーディングをMaterialに変更します。
@@ -122,7 +125,8 @@ Shadelessモードで表示するための必要設定を自動で行います�
 * ライティングは変更しません。設定が面倒な場合は、WorldのColorを白(1,1,1)に変更すればそれなりに見えます。
 
 #### Reset
-GLSLボタンで変更した内容を初期状態に戻します。
+Reset the model and its materials back to the initial state.
+
 
 #### Separate by materials
 選択したメッシュオブジェクトのメッシュをマテリアル毎に分割し、分割後のオブジェクト名を各マテリアル名に変更します。
